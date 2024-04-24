@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('poster.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.artwork {
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.artwork img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+form {
+    margin: 20px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+form label, form input, form button {
+    display: block;
+    margin: 10px auto;
+}
+
+form button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #555;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Competition</title>
+    <link rel="stylesheet" href="pr112.css">
+</head>
+<body>
+    <header>
+        <h1>Artist Competition</h1>
+    </header>
+    <div id="gallery">
+        <!-- Artwork will be dynamically added here -->
+    </div>
+    <form id="submitForm">
+        <label for="artistName">Artist Name:</label>
+        <input type="text" id="artistName" required>
+        <label for="artworkTitle">Artwork Title:</label>
+        <input type="text" id="artworkTitle" required>
+        <label for="artworkImage">Artwork Image URL:</label>
+        <input type="url" id="artworkImage" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="pr113.js"></script>
+</body>
+</html>
+
+document.getElementById('submitForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Get form values
+    var artistName = document.getElementById('artistName').value;
+    var artworkTitle = document.getElementById('artworkTitle').value;
+    var artworkImage = document.getElementById('artworkImage').value;
+
+    // Create new artwork element
+    var artworkElement = document.createElement('div');
+    artworkElement.classList.add('artwork');
+    artworkElement.innerHTML = `
+        <h3>${artworkTitle}</h3>
+        <p>By: ${artistName}</p>
+        <img src="${artworkImage}" alt="${artworkTitle}">
+    `;
+
+    // Append artwork element to gallery
+    document.getElementById('gallery').appendChild(artworkElement);
+
+    // Clear form fields
+    document.getElementById('artistName').value = '';
+    document.getElementById('artworkTitle').value = '';
+    document.getElementById('artworkImage').value = '';
+});
